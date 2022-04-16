@@ -9,6 +9,8 @@ namespace DynamicMeshCutter
     public class MouseBehaviour : CutterBehaviour
     {
         public LineRenderer LR => GetComponent<LineRenderer>();
+        public GameObject knife;
+        public GameObject pivot;
         private Vector3 _from;
         private Vector3 _to;
         private bool _isDragging;
@@ -20,16 +22,19 @@ namespace DynamicMeshCutter
             if (Input.GetMouseButtonDown(0))
             {
                 _isDragging = true;
+                knife.transform.RotateAround(pivot.transform.position, Vector3.down, 50 * Time.deltaTime);
 
-                var mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane + 0.05f);
-                _from = Camera.main.ScreenToWorldPoint(mousePos);
+                // var mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane + 0.05f);
+                // _from = Camera.main.ScreenToWorldPoint(mousePos);
             }
 
             if (_isDragging)
             {
-                var mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane + 0.05f);
-                _to = Camera.main.ScreenToWorldPoint(mousePos);
-                VisualizeLine(true);
+                knife.transform.RotateAround(pivot.transform.position, Vector3.down, 100 * Time.deltaTime);
+
+                // var mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane + 0.05f);
+                // _to = Camera.main.ScreenToWorldPoint(mousePos);
+                // VisualizeLine(true);
             }
             else
             {
@@ -38,7 +43,7 @@ namespace DynamicMeshCutter
 
             if (Input.GetMouseButtonUp(0) && _isDragging)
             {
-                Cut();
+                // Cut();
                 _isDragging = false;
             }
         }
@@ -46,6 +51,7 @@ namespace DynamicMeshCutter
         private void Cut()
         {
             Plane plane = new Plane(_from, _to, Camera.main.transform.position);
+            // Plane plane =  GameObject.Find("PlainCutter");
 
             var roots = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
             foreach (var root in roots)

@@ -1,9 +1,12 @@
+using UnityEngine;
+using System.Collections;
 
 namespace DynamicMeshCutter
 {
     public class PlaneBehaviour : CutterBehaviour
     {
         public float DebugPlaneLength = 2;
+        private bool isCut = false;
         public void Cut()
         {
             var roots = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
@@ -22,6 +25,16 @@ namespace DynamicMeshCutter
         void OnCreated(Info info, MeshCreationData cData)
         {
             MeshCreation.TranslateCreatedObjects(info, cData.CreatedObjects, cData.CreatedTargets, Separation);
+        }
+
+        void OnCollisionEnter(Collision collision)
+        {
+            Debug.Log("Cut");
+            if (!isCut)
+            {
+                Cut();
+                isCut = true;
+            }
         }
 
     }
