@@ -30,7 +30,7 @@ namespace DynamicMeshCutter
 
             if (_isDragging)
             {
-                knife.transform.RotateAround(pivot.transform.position, Vector3.down, 100 * Time.deltaTime);
+                knife.transform.RotateAround(pivot.transform.position, Vector3.down, 1000 * Time.deltaTime);
 
                 // var mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane + 0.05f);
                 // _to = Camera.main.ScreenToWorldPoint(mousePos);
