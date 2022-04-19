@@ -24,19 +24,17 @@ namespace DynamicMeshCutter
             }
         }
 
+        public void CutCollider(string name)
+        {
+            colliderName = name;
+            Cut();
+        }
         void OnCreated(Info info, MeshCreationData cData)
         {
             MeshCreation.TranslateCreatedObjects(info, cData.CreatedObjects, cData.CreatedTargets, Separation);
         }
 
-        void OnCollisionEnter(Collision collision)
-        {
-            // if (collision.gameObject.tag == "Enemy") restartScreen.SetActive(true);
-            // else {
-                colliderName = collision.gameObject.name;
-                Cut();
-            // }
-        }
+        
 
     }
 }
