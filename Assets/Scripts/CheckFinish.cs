@@ -21,6 +21,7 @@ public class CheckFinish : MonoBehaviour
     {
         if (knife.position.z +0.9*rend.bounds.size.z -distance + transform.position.z < 0)
         {
+            PlayerPrefs.SetInt("GameState", 2);
             winScreen.SetActive(true);
         }
     }

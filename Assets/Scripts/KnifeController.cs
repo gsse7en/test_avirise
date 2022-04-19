@@ -22,6 +22,7 @@ public class KnifeController : MonoBehaviour
     {
         pivotPosition = pivot.transform.position;  
         cutter = GetComponent<PlaneBehaviour>();
+        PlayerPrefs.SetInt("GameState", 0);
     }
     private void Update() {
         deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
@@ -33,7 +34,7 @@ public class KnifeController : MonoBehaviour
         // TODO
         // -Freeze move on lose
         // -Debounce or WaitForSeconds
-        
+        if (PlayerPrefs.GetInt("GameState") > 0) return;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -52,14 +53,13 @@ public class KnifeController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
         {
             //TODO:
-            // -Bake Lights
-            // -Adjust speed
-            // -unify scrore - use player prefs
             // -fix canvases
             // -slow time on sore multiplyer
+            // - move with leentween
 
             if (collision.gameObject.tag == "Enemy")
             {
+                PlayerPrefs.SetInt("GameState", 1);
                 loseText.SetText("Score: " + score + " cuts");
                 loseScreen.SetActive(true);
             }
