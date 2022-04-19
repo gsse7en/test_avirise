@@ -8,8 +8,10 @@ public class KnifeController : MonoBehaviour
 {
     [SerializeField] private GameObject pivot;
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI fpsText;
     private Vector3 pivotPosition;
     private int score = 0;
+    private float deltaTime;
     private bool _isDragging = false;
     private PlaneBehaviour cutter;
 
@@ -18,11 +20,17 @@ public class KnifeController : MonoBehaviour
         pivotPosition = pivot.transform.position;  
         cutter = GetComponent<PlaneBehaviour>();
     }
+    private void Update() {
+        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+        float fps = 1.0f / deltaTime;
+        fpsText.SetText(Mathf.Ceil(fps).ToString());
+    }
     private void FixedUpdate()
     {
         // TODO
         // -Freeze move on lose
         // -Debounce or WaitForSeconds
+        
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -41,7 +49,6 @@ public class KnifeController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
         {
             //TODO:
-            // -Make FPS
             // -Make Win with score
             // -Make Lose
             // -Bake Lights
