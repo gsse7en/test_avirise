@@ -8,6 +8,7 @@ public class KnifeController : MonoBehaviour
 {
     [SerializeField] private GameObject pivot;
     [SerializeField] private GameObject loseScreen;
+    [SerializeField] private GameObject hudScreen;
     [SerializeField] private TextMeshProUGUI loseText;
     [SerializeField] private TextMeshProUGUI scoreText;
 
@@ -31,9 +32,6 @@ public class KnifeController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        // TODO
-        // -Freeze move on lose
-        // -Debounce or WaitForSeconds
         if (PlayerPrefs.GetInt("GameState") > 0) return;
 
         if (Input.GetMouseButtonDown(0))
@@ -53,14 +51,15 @@ public class KnifeController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
         {
             //TODO:
-            // -fix canvases
-            // -slow time on sore multiplyer
-            // - move with leentween
+            // -slow time on score multiplyer
+            // -Debounce or WaitForSeconds
+
 
             if (collision.gameObject.tag == "Enemy")
             {
                 PlayerPrefs.SetInt("GameState", 1);
                 loseText.SetText("Score: " + score + " cuts");
+                hudScreen.SetActive(false);
                 loseScreen.SetActive(true);
             }
             else {
@@ -68,6 +67,7 @@ public class KnifeController : MonoBehaviour
                 cutter.CutCollider(colliderName);
                 score++;
                 scoreText.SetText("Score: " + score + " cuts");
+                PlayerPrefs.SetInt("Score", score);
             }
         }
 }
