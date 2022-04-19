@@ -7,7 +7,8 @@ namespace DynamicMeshCutter
     {
         public float DebugPlaneLength = 2;
         private bool isCut = false;
-        public void Cut(string name = "")
+        private string colliderName = "";
+        public void Cut()
         {
             var roots = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
             foreach (var root in roots)
@@ -17,7 +18,7 @@ namespace DynamicMeshCutter
                 var targets = root.GetComponentsInChildren<MeshTarget>();
                 foreach (var target in targets)
                 {
-                    if (name.Contains(target.name))
+                    if (colliderName.Contains(target.name))
                         Cut(target, transform.position, transform.forward, null, OnCreated);
                 }
             }
@@ -30,8 +31,11 @@ namespace DynamicMeshCutter
 
         void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.tag == "Enemy") Debug.Log("Game Over");
-            else Cut(collision.gameObject.name);
+            // if (collision.gameObject.tag == "Enemy") restartScreen.SetActive(true);
+            // else {
+                colliderName = collision.gameObject.name;
+                Cut();
+            // }
         }
 
     }

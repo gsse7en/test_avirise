@@ -4,13 +4,19 @@ using UnityEngine;
 
 namespace DynamicMeshCutter
 {
-
     public class MouseBehaviour : CutterBehaviour
     {
         public GameObject knife;
         public GameObject pivot;
+        private Vector3 pivotPosition;
+        private Transform knifeTrannsform;
         private bool _isDragging = false;
 
+        private void Awake() 
+        {
+            pivotPosition = pivot.transform.position;  
+            knifeTrannsform = knife.transform;
+        }
         protected override void Update()
         {
             base.Update();
@@ -24,7 +30,7 @@ namespace DynamicMeshCutter
             }
             if (_isDragging)
             {
-                knife.transform.RotateAround(pivot.transform.position, Vector3.forward, Input.GetAxis("Mouse Y")*10);
+                knifeTrannsform.RotateAround(pivotPosition, Vector3.forward, Input.GetAxis("Mouse Y")*10);
             }
         }
 
