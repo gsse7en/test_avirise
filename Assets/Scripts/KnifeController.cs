@@ -7,7 +7,8 @@ using DynamicMeshCutter;
 public class KnifeController : MonoBehaviour
 {
     [SerializeField] private GameObject pivot;
-    [SerializeField] private TextMeshProUGUI winScoreText;
+    [SerializeField] private GameObject loseScreen;
+    [SerializeField] private TextMeshProUGUI loseText;
     [SerializeField] private TextMeshProUGUI scoreText;
 
     [SerializeField] private TextMeshProUGUI fpsText;
@@ -51,22 +52,22 @@ public class KnifeController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
         {
             //TODO:
-            // -Make Win with score
-            // -Make Lose
             // -Bake Lights
             // -Adjust speed
             // -unify scrore - use player prefs
+            // -fix canvases
+            // -slow time on sore multiplyer
 
             if (collision.gameObject.tag == "Enemy")
             {
-                Debug.LogError("Hp--");
+                loseText.SetText("Score: " + score + " cuts");
+                loseScreen.SetActive(true);
             }
             else {
                 string colliderName = collision.gameObject.name;
                 cutter.CutCollider(colliderName);
                 score++;
                 scoreText.SetText("Score: " + score + " cuts");
-                winScoreText.SetText("Score: " + score + " cuts");
             }
         }
 }
