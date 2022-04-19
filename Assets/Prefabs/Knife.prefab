@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7459669778934963678}
   - component: {fileID: 7459669778934963676}
   - component: {fileID: 7459669778934963667}
+  - component: {fileID: 244517790}
   m_Layer: 0
   m_Name: Knife
   m_TagString: Untagged
@@ -81,6 +82,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &244517790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7459669778934963679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e45aecacc29b040c68da173e3e75d9fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pivot: {fileID: 7459669780286362450}
+  winScoreText: {fileID: 0}
+  scoreText: {fileID: 0}
+  fpsText: {fileID: 0}
 --- !u!1 &7459669780286362450
 GameObject:
   m_ObjectHideFlags: 0
