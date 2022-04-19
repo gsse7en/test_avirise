@@ -7,7 +7,7 @@ namespace DynamicMeshCutter
     {
         public float DebugPlaneLength = 2;
         private bool isCut = false;
-        public void Cut(string name)
+        public void Cut(string name = "")
         {
             var roots = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
             foreach (var root in roots)
