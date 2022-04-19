@@ -15,11 +15,11 @@ namespace DynamicMeshCutter
 
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
-            if (GUILayout.Button("Cut"))
-            {
-                _pb.Cut();
-            }
+            // base.OnInspectorGUI();
+            // if (GUILayout.Button("Cut"))
+            // {
+            //     _pb.Cut();
+            // }
         }
 
         void OnSceneGUI()
