@@ -30,7 +30,8 @@ namespace DynamicMeshCutter
 
         void OnCollisionEnter(Collision collision)
         {
-            Cut(collision.gameObject.name);
+            if (collision.gameObject.tag == "Enemy") Debug.Log("Game Over");
+            else Cut(collision.gameObject.name);
         }
 
     }
