@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using DynamicMeshCutter;
 
 public class KnifeController : MonoBehaviour
 {
-    public GameObject pivot;
+    [SerializeField] private GameObject pivot;
+    [SerializeField] private TextMeshProUGUI scoreText;
     private Vector3 pivotPosition;
-    // private Transform knifeTrannsform;
+    private int score = 0;
     private bool _isDragging = false;
     private PlaneBehaviour cutter;
 
@@ -19,7 +21,6 @@ public class KnifeController : MonoBehaviour
     private void FixedUpdate()
     {
         // TODO
-        // -Move to MonnoBehavior
         // -Freeze move on lose
         // -Debounce or WaitForSeconds
 
@@ -40,9 +41,8 @@ public class KnifeController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
         {
             //TODO:
-            // -Make Score
             // -Make FPS
-            // -Make Win
+            // -Make Win with score
             // -Make Lose
             // -Bake Lights
             // -Adjust speed
@@ -54,6 +54,8 @@ public class KnifeController : MonoBehaviour
             else {
                 string colliderName = collision.gameObject.name;
                 cutter.CutCollider(colliderName);
+                score++;
+                scoreText.SetText("Score: " + score + " cuts");
             }
         }
 }
