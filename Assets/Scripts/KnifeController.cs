@@ -48,11 +48,17 @@ public class KnifeController : MonoBehaviour
         {
             deltaAngle = Input.GetAxis("Mouse X")*10;
             angle += deltaAngle;
-            if (angle > 360) angle -= 360;
-            if (angle < -360) angle += 360;
-            Debug.Log(angle);
+            if (angle > 180) angle -= 180;
+            if (angle < -180) angle += 180;
             transform.RotateAround(pivotPosition, Vector3.forward, deltaAngle);
         }
+    }
+    void GameOver()
+    {
+        PlayerPrefs.SetInt("GameState", 1);
+        loseText.SetText("Score: " + score + " cuts");
+        hudScreen.SetActive(false);
+        loseScreen.SetActive(true);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -74,6 +80,22 @@ public class KnifeController : MonoBehaviour
                 cutter.CutCollider(colliderName);
                 score++;
                 scoreText.SetText("Score: " + score + " cuts");
+                PlayerPrefs.SetInt("Score", score);
+            } else if (collision.gameObject.tag == "Mixed") {
+                string colliderName = collision.gameObject.name;
+                if (angle < -75 || angle > 60) 
+                {
+                    GameOver();
+                    return;
+                }
+                if (angle > -15 && angle < 30) 
+                {
+                    GameOver();
+                    return;
+                }
+                cutter.CutCollider(colliderName);
+                score++;
+                scoreText.SetText("Angle: " + angle + " deg");
                 PlayerPrefs.SetInt("Score", score);
             }
         }
