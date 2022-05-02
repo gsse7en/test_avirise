@@ -16,6 +16,8 @@ public class KnifeController : MonoBehaviour
     private Vector3 pivotPosition;
     private int score = 0;
     private float deltaTime;
+    private float angle = 0;
+    private float deltaAngle = 0;
     private bool _isDragging = false;
     private PlaneBehaviour cutter;
 
@@ -44,7 +46,12 @@ public class KnifeController : MonoBehaviour
         }
         if (_isDragging)
         {
-            transform.RotateAround(pivotPosition, Vector3.forward, Input.GetAxis("Mouse Y")*10);
+            deltaAngle = Input.GetAxis("Mouse X")*10;
+            angle += deltaAngle;
+            if (angle > 360) angle -= 360;
+            if (angle < -360) angle += 360;
+            Debug.Log(angle);
+            transform.RotateAround(pivotPosition, Vector3.forward, deltaAngle);
         }
     }
 
