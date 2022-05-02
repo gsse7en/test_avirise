@@ -69,7 +69,7 @@ public class KnifeController : MonoBehaviour
                 hudScreen.SetActive(false);
                 loseScreen.SetActive(true);
             }
-            else {
+            else if (collision.gameObject.tag == "Element") {
                 string colliderName = collision.gameObject.name;
                 cutter.CutCollider(colliderName);
                 score++;
